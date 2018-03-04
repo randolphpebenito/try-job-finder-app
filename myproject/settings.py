@@ -10,7 +10,7 @@ SECRET_KEY = config('SECRET_KEY', default='123456abc123')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [

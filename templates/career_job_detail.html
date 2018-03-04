@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}{{ career_job.job_title }}{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Jobs</a></li>
+  <li class="breadcrumb-item active">{{ career_job.job_title }}</li>
+{% endblock %}
+
+{% block content %}
+{% if career_job.created_by == user %}
+	<div class="mb-4">
+		<a href="{% url 'career_job_update' career_job.pk %}" class="btn btn-primary" role="button">Edit Job</a>
+	</div>
+{% endif %}
+<div class="card">
+  <div class="card-header">
+    Job {{ career_job.pk }}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-3">
+          <img src="{% static 'img/company_logo_2.jpg' %}" alt="{{ career_job.created_by.username }}" class="w-100 rounded">
+        <span class="badge badge-primary mt-2">Views {{ career_job.views }}</span>
+
+        {% if career_job.job_status == 'Open' %}
+            <span class="badge badge-success badge-status mt-2">Available</span>
+        {% else %}
+            <span class="badge badge-danger badge-status mt-2">Closed</span>
+        {% endif %}
+      </div>
+      <div class="col-9">
+        <h4 class="card-title">{{ career_job.company_name }}</h4>
+        <h5 class="card-title">{{ career_job.job_title }}</h5>
+        <h6 class="text-muted">Location: {{ career_job.job_location_country }}, {{ career_job.job_location_city }}</h6>
+        <h6 class="text-muted">{{ career_job.job_type }}</h6>
+        <small class="text-muted">Last updated: {{ career_job.updated_at | naturaltime }}</small>
+      </div>
+    </div>
+      <div class="row">
+          <div class="col-12">
+            <h6 style="margin-top: 20px; color: grey">Job Description</h6>
+            <hr>
+            <div class="card-text">
+                <div class="container">
+                    {{ career_job.get_job_description_as_markdown }}
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

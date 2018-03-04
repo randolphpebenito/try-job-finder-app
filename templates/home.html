@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load humanize %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Latest Jobs [{{ total_count }}]
+
+</li>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="row">
+    <div class="col-md-2" style="padding-bottom: 10px">
+        <a href="{% url 'career_job_create' %}" class="btn btn-primary" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Post Job</a>
+    </div>
+</div>
+{% endif %}
+<div class="row" style="padding-bottom: 20px">
+  <div class="col-md-6">
+    <form action="{% url 'home' %}" method="GET">
+      <div class="input-group input-shadow">
+        <span class="input-group-addon" id="sizing-addon1" type="submit"><i class="fa fa-search" aria-hidden="true"></i></span>
+        <input type="text" class="form-control" name="q" placeholder="Search title, tag, country or job type" aria-describedby="sizing-addon1" value="{{ search_param }}">
+      </div>
+    </form>
+  </div>
+</div>
+{% if has_search %}
+    <small class="text-muted">Search results for '{{ search_param }}': {{ career_jobs.count }} found</small>
+{% endif %}
+{% for cj in career_jobs %}
+<div class="row">
+    <div class="col-md-12">
+		<div class="card">
+            <div class="card-header pt-0 no-bb">
+                <img src="{% static 'img/company_logo.jpg' %}" class="float-left mt-2 mr-2">
+                <span class="badge badge-primary float-right mt-2">Views {{ cj.views }}</span>
+
+                {% if cj.job_status == 'Open' %}
+                    <span class="badge badge-success badge-status float-right mt-2">Available</span>
+                {% else %}
+                    <span class="badge badge-danger badge-status float-right mt-2">Closed</span>
+                {% endif %}
+
+                <h5 class="card-title"><a href="{% url 'career_job_detail' cj.pk %}">{{ cj.job_title }}</a></h5>
+                <h6 class="card-subtitle d-inline-block">{{ cj.company_name }}</h6>
+                <div><small class="text-muted">{{ cj.tag }} | {{ cj.job_type }}
+                    {% if cj.created_by == user %}
+                    | <a href="{% url 'career_job_update' cj.pk %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+                    {% endif %}
+                </small></div>
+            </div> <!-- ./card-header -->
+            <div class="card-block">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-2 col-md-4 text-center">
+                        <small class="card-subtitle mb-2 text-muted text-center"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ cj.updated_at | naturaltime }}</small></div>
+                    <div class="com-sm-2 col-md-4">
+                        <small class="card-subtitle mb-2 text-muted text-center"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ cj.job_location_country }}, {{ cj.job_location_city }}</small>
+                    </div>
+                    <div class="com-sm-2 col-md-4">
+                        <small class="card-subtitle mb-2 text-muted text-center"><i class="fa fa-tag" aria-hidden="true"></i> {{ cj.tag }}</small>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+        </div> <!-- ./card -->
+    </div> <!-- ./col-md-12 -->
+</div> <!-- ./row -->
+
+
+{% endfor %}
+{% include 'includes/pagination.html' %}
+{% endblock %}

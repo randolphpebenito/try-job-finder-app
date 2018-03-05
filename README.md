@@ -17,7 +17,7 @@ Be sure you have the following installed on your development machine:
 
 ## Running Locally
 
-Make sure you have Python [installed properly](http://install.python-guide.org). Also, install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
+Make sure you have Python [installed properly](http://install.python-guide.org).
 
 ```sh
 $ git clone https://github.com/randolphpebenito/try-job-finder-app.git

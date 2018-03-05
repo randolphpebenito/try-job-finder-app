@@ -2,6 +2,8 @@
 
 A simple job finder application (Python 3.6, Django 1.11), which can easily be deployed to Heroku.
 
+Demo: [click here](https://jobfindersifi-alpha.herokuapp.com/)
+
 ## Prerequisites
 
 Be sure you have the following installed on your development machine:
@@ -17,7 +19,7 @@ Be sure you have the following installed on your development machine:
 
 ## Running Locally
 
-Make sure you have Python [installed properly](http://install.python-guide.org).
+Make sure you have Python [installed properly](http://install.python-guide.org). Also, install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
 
 ```sh
 $ git clone https://github.com/randolphpebenito/try-job-finder-app.git

@@ -14,6 +14,7 @@ Be sure you have the following installed on your development machine:
 + Database (either one):
     + MySQL >= 5.6 ([guide]())
     + Postgres >= 9.2 ([guide]())
+    + SQLite3
 + pip
 
 

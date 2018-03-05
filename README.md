@@ -31,6 +31,18 @@ $ cp .env.example .env # Change your designated settings (12 factor app)
 $ python manage.py migrate
 $ python manage.py createsuperuser # Create your admin user
 $ python manage.py collectstatic
+
+$ python manage.py test # THIS IS IMPORTANT
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.............................................................................
+----------------------------------------------------------------------
+Ran 77 tests in 23.428s
+
+OK
+Destroying test database for alias 'default'...
+
+
 $ python manage.py runserver
 Performing system checks...
 
